@@ -4,7 +4,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 export class Customer {
 
     @PrimaryGeneratedColumn('increment')
-    cutomer_id: number
+    customer_id: number
 
     @Column('text',{
         nullable:false
@@ -14,7 +14,7 @@ export class Customer {
     @Column('text',{
         nullable: false
     })
-    document_id: true
+    document_id: string
 
      @Column('text',{
         nullable: true
