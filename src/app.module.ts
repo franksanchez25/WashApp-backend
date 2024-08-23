@@ -3,8 +3,9 @@ import { CustomerModule } from './customer/customer.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { ServiceModule } from './service/service.module';
-import { VehiclesModule } from './vehicles/vehicles.module';
+
 import { WashModule } from './wash/wash.module';
+import { VehiclesModule } from './vehicle/vehicles.module';
 
 @Module({
   imports: [

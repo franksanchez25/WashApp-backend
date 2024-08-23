@@ -14,14 +14,8 @@ export class VehicleType {
     vehicle_type: string
 
 
- @OneToMany(
-    ()=> Vehicle,
-    (vehicle) => vehicle.vehicle_type,{
-        cascade:true,
-        eager:true
-    }
- )
-    vehicle: Vehicle [];
+  @OneToMany(() => Vehicle, vehicle => vehicle.vehicleType)
+  vehicles: Vehicle[];
 
     @Column('timestamp',{
      nullable: false,

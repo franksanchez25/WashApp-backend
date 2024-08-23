@@ -5,6 +5,7 @@ import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Customer } from './entities/customer.entity';
 import { Repository } from 'typeorm';
+import { Vehicle } from '../vehicle/entities/vehicle.entity';
 
 @Injectable()
 export class CustomerService {
@@ -37,44 +38,38 @@ export class CustomerService {
   async findAll() {
 
 
-    const customers = await this.customerRepository.find();
+    return  await this.customerRepository.find();
 
 
-    return customers;
   }
 
   async findOne(id: number) {
 
-    
-    
       const customer = await this.customerRepository.findOneBy({customer_id:id})
-
+     
       if (!customer) throw new NotFoundException('No encontrado')
-
       
-
-        return customer;
+      return customer;
        
-
   }
 
   async update(customer_id: number, updateCustomerDto: UpdateCustomerDto) {
 
 
+  await this.customerRepository.update(customer_id, updateCustomerDto)
 
-const customer = await this.customerRepository.findOne({ where: { customer_id } });
-
-  if (!customer) {
-    throw new NotFoundException(`No se ha encontrado el cliente con id ${customer_id}`);
+  return this.customerRepository.findOne({where: {customer_id}})
+  
   }
 
-  const updatedCustomer = this.customerRepository.merge(customer, updateCustomerDto);
+  async remove(id: number) {
 
-  return this.customerRepository.save(updatedCustomer);
- 
-  }
+    let customer = this.findOne(id);
 
-  remove(id: number) {
-    return `This action removes a #${id} customer`;
+    if (!customer) {
+       throw new NotFoundException('Vehiculo no encontrado');
+    }
+
+
   }
 }

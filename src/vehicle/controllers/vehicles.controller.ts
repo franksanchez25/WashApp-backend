@@ -1,7 +1,7 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { VehiclesService } from './vehicles.service';
-import { CreateVehicleDto } from './dto/create-vehicle.dto';
-import { UpdateVehicleDto } from './dto/update-vehicle.dto';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
+import { VehiclesService } from '../services/vehicles.service';
+import { CreateVehicleDto } from '../dto/create-vehicle.dto';
+import { UpdateVehicleDto } from '../dto/update-vehicle.dto';
 
 @Controller('vehicles')
 export class VehiclesController {
@@ -28,7 +28,7 @@ export class VehiclesController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.vehiclesService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
+    return this.vehiclesService.remove(id);
   }
 }

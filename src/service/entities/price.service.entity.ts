@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Service } from "./service.entity";
-import { VehicleType } from "src/vehicles/entities/vehicle.type.entity";
+import { VehicleType } from "src/vehicle/entities/vehicle.type.entity";
 
 @Entity('price_service')
 export class PriceService {

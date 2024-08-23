@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { VehicleType } from './vehicle.type.entity';
 
 @Entity('vehicles')
@@ -15,6 +15,10 @@ export class Vehicle {
     @Column('text')
     model: string
 
+    @Column({
+        default:true
+    })
+    isActive: boolean;
 
     @Column('timestamp',{
      nullable: false,
@@ -22,14 +26,12 @@ export class Vehicle {
     })
     created_at: Date
 
-    @ManyToOne(
-        ()=> VehicleType,
-        (vehicletype)=> vehicletype.vehicle,
-        {
-            onDelete:'CASCADE'
-        }
-    )
+    
 
-    vehicle_type: VehicleType;
+    @ManyToOne(() => VehicleType, vehicleType => vehicleType.vehicles)
+  @JoinColumn({ name: 'vehicletype_id' })
+  vehicleType: VehicleType;
 
+    @Column()
+    vehicletype_id: number;
 }
